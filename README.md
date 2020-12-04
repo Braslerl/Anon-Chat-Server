@@ -17,6 +17,10 @@ You can see here how a client can use the api.
 ![](images/Client_actions_room.png)
 
 # Demo Client:
+For direct message:
 ![Direct Message](images/Java-dm-demo.gif)
 
+for public room:
 ![Room](images/Java-room-demo.gif)
+When I open the "get-url" I get this:
+![Test_room](images/test_room.png)
