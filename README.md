@@ -15,3 +15,8 @@ You can see here how a client can use the api.
 ## How to create an client for room messages
 
 ![](images/Client_actions_room.png)
+
+# Demo Client:
+![Direct Message](images/Java-dm-demo.gif)
+
+![Room](images/Java-room-demo.gif)
