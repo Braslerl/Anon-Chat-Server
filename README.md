@@ -7,3 +7,7 @@ Feel free to create you own and share it.
 ## How to create an client for direct messages
 
 ![](images/Client_actions.png)
+
+## How to create an client for room messages
+
+![](images/Client_actions_room.png)
