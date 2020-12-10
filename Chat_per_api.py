@@ -4,14 +4,15 @@ from random import randint
 from flask_limiter import Limiter
 from flask_limiter.util import get_remote_address
 app = Flask(__name__)
-limiter = Limiter(
-    app,
-    key_func=get_remote_address,
-    default_limits=["24000 per day", "1000 per hour"]
-)
+
 wsgi_app = app.wsgi_app
 systemRandom = random.SystemRandom()
 
+limiter = Limiter(
+    app,
+    key_func=get_remote_address,
+    default_limits=[""]
+)
 
 max_lines = 100 #change this value if you want longer chats, default is 100
 #generate ids with 6 numbers, you can change it
@@ -24,20 +25,20 @@ token_length = 512 #how long a token will be
 
 #Here the client can request an ID
 @app.route('/request/id')
-@limiter.limit("100/hour;5/minute") #Set a Limit to avoid spamming
+@limiter.limit("10 per minute")
 def request_id():
-        id = randint(start_id, end_id)
-        my_file = ("dm_chats/0_user_ids/"+str(id))
-        try:
-            f = open("dm_chats/0_user_ids/"+str(id))
-            # Do something with the file
-        except IOError:
-            return ("Error, please try again")
-        finally:
-            with codecs.open("dm_chats/0_user_ids/"+str(id), 'a', 'utf-8', 'strict') as fh:
-                token = secrets.token_hex(token_length)  
-                fh.write(token)
-            return (str(id)+"&token="+token)
+    id = randint(start_id, end_id)
+    my_file = ("dm_chats/0_user_ids/"+str(id))
+    try:
+        f = open("dm_chats/0_user_ids/"+str(id))
+        # Do something with the file
+    except IOError:
+        return ("Error, please try again")
+    finally:
+        with codecs.open("dm_chats/0_user_ids/"+str(id), 'a', 'utf-8', 'strict') as fh:
+            token = secrets.token_hex(token_length)  
+            fh.write(token)
+        return (str(id)+"&token="+token)
 
 @app.route('/send/dm')
 def send_dm():
@@ -180,10 +181,9 @@ def download_room():
 
 @app.errorhandler(Exception)
 def handle_error(e):
-    return ("Route doesn't exist")
+    return ("Nothing here")
 
 @app.route("/ping")
-@limiter.exempt
 def ping():
     return "PONG"
 
