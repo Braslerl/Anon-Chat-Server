@@ -11,7 +11,7 @@ systemRandom = random.SystemRandom()
 limiter = Limiter(
     app,
     key_func=get_remote_address,
-    default_limits=[""]
+    default_limits=["100 per minute"]
 )
 
 max_lines = 100 #change this value if you want longer chats, default is 100
