@@ -1,4 +1,4 @@
-import codecs, secrets, string, datetime, time, random, os.path
+import codecs, secrets, string, datetime, time, random, os.path, colorama, requests
 from flask import request, jsonify, send_file, Flask
 from random import randint
 from flask_limiter import Limiter
@@ -21,6 +21,20 @@ end_id = 999999
 #################
 token_length = 512 #how long a token will be
 
+#Check for updates
+version = "1"
+from colorama import Fore
+from colorama import Style
+colorama.init()
+url = 'https://raw.githubusercontent.com/Braslerl/version/main/ihs77WPZRmMMfae8'
+output = requests.get(url).text
+output.replace("\n", " ")
+if float(output) > float(version):
+    print(Fore.YELLOW + "Your have to upgrade your version. (https://github.com/Braslerl/Anon-Chat-Server)" + Style.RESET_ALL)
+
+    exit()
+else:
+    print(Fore.GREEN + "You are using the latest Version" + Style.RESET_ALL)
 
 
 #Here the client can request an ID
